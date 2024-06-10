@@ -8,6 +8,7 @@ export default function Home() {
   const [randomWords, setRandomWords] = useState<Word[]>([]);
   const [selectedWords, setSelectedWords] = useState<Word[]>([]);
   const [matchedCategories, setMatchedCategories] = useState<number[]>([]);
+  const [won, setWin] = useState(false);
 
   const handleClick = (word: Word) => {
     console.log(selectedWords);
@@ -59,30 +60,47 @@ export default function Home() {
           firstCategory,
         ]);
 
+        console.log(matchedCategories.sort());
+
         setSelectedWords([]);
       }
     }
   }, [selectedWords]);
 
+  useEffect(() => {
+    if ([1, 2, 3, 4].every((r) => matchedCategories.includes(r))) {
+      setWin(true);
+    }
+  }, [matchedCategories]);
+
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
       <span className="text-2xl text-center font-semibold">CONNECTIONS</span>
-      <div className="flex flex-wrap gap-4 p-4 justify-center">
-        {randomWords.map((w) => (
-          <Card key={w.id} word={w} handleClick={handleClick} />
-        ))}
-      </div>
-      <button
-        className="border-2 border-slate-500 border-solid w-24 rounded-md text-center"
-        onClick={() => {
-          setSelectedWords([]);
-          setRandomWords((prevWords) =>
-            prevWords.map((w) => ({ ...w, selected: false }))
-          );
-        }}
-      >
-        CLEAR
-      </button>
+      {!won && (
+        <div className="flex flex-wrap gap-4 p-4 justify-center">
+          {randomWords.map((w) => (
+            <Card key={w.id} word={w} handleClick={handleClick} />
+          ))}
+        </div>
+      )}
+      {!won && (
+        <button
+          className="border-2 border-slate-500 border-solid w-24 rounded-md text-center"
+          onClick={() => {
+            setSelectedWords([]);
+            setRandomWords((prevWords) =>
+              prevWords.map((w) => ({ ...w, selected: false }))
+            );
+          }}
+        >
+          CLEAR
+        </button>
+      )}
+      {won && (
+        <span className="text-3xl font-semibold text-center text-fuchsia-800 animate-bounce">
+          CONGRATULIONS!
+        </span>
+      )}
     </main>
   );
 }
