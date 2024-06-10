@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Word } from "./model";
 
 interface PropType {
   word: Word;
+  handleClick: (word: Word) => void;
 }
 
-export default function Card({ word }: PropType) {
+export default function Card({ word, handleClick }: PropType) {
   const [selected, setSelected] = useState(word.selected);
 
-  const handleClick = () => {
-    setSelected((prevSelected) => !prevSelected);
-  };
+  useEffect(() => {
+    setSelected(word.selected);
+  }, [word.selected]);
 
   return (
     <div
@@ -18,7 +19,7 @@ export default function Card({ word }: PropType) {
     text-center content-center text-md cursor-pointer ${
       selected ? "bg-gray-700 text-slate-100" : "bg-slate-200 text-black"
     }`}
-      onClick={handleClick}
+      onClick={() => handleClick(word)}
     >
       {word.text}
     </div>
