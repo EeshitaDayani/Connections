@@ -10,6 +10,7 @@ export default function Home() {
   const [matchedCategories, setMatchedCategories] = useState<number[]>([]);
 
   const handleClick = (word: Word) => {
+    console.log(selectedWords);
     if (word.matched) return;
 
     if (word.selected) {
@@ -38,24 +39,30 @@ export default function Home() {
   useEffect(() => {
     if (selectedWords.length === 4) {
       const firstCategory = selectedWords[0].category;
-      const allSameCategory = selectedWords.every((word) => word.category === firstCategory);
-  
+      const allSameCategory = selectedWords.every(
+        (word) => word.category === firstCategory
+      );
+
       if (allSameCategory) {
         const ids = selectedWords.map((word) => word.id);
-  
+
         setRandomWords((prevWords) =>
           prevWords.map((word) =>
-            ids.includes(word.id) ? { ...word, matched: true, selected: false } : word
+            ids.includes(word.id)
+              ? { ...word, matched: true, selected: false }
+              : word
           )
         );
-  
-        setMatchedCategories((prevCategories) => [...prevCategories, firstCategory]);
+
+        setMatchedCategories((prevCategories) => [
+          ...prevCategories,
+          firstCategory,
+        ]);
+
+        setSelectedWords([]);
       }
-  
-      setSelectedWords([]);
     }
   }, [selectedWords]);
-  
 
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
