@@ -1,6 +1,15 @@
-interface Word {
+"use client";
+
+export interface Word {
+  id: number;
   text: String;
   category: number;
+  selected: Boolean;
+}
+
+interface Category {
+  text: String;
+  number: number;
 }
 
 const shuffle = (array: Word[]) => {
@@ -8,22 +17,29 @@ const shuffle = (array: Word[]) => {
 };
 
 const words: Word[] = [
-  { text: "FLOWERS", category: 1 },
-  { text: "POLISH", category: 1 },
-  { text: "CROCHET", category: 1 },
-  { text: "LIGHTS", category: 1 },
-  { text: "MISSING", category: 2 },
-  { text: "CREW", category: 2 },
-  { text: "TINKER", category: 2 },
-  { text: "FIGHTER", category: 2 },
-  { text: "CARRIE", category: 4 },
-  { text: "PRONTO", category: 4 },
-  { text: "HILTON", category: 4 },
-  { text: "ANGARA", category: 4 },
-  { text: "GLASSES", category: 3 },
-  { text: "STRING", category: 3 },
-  { text: "JEANS", category: 3 },
-  { text: "MALA", category: 3 },
+  { id: 1, text: "FLOWERS", category: 1, selected: false },
+  { id: 2, text: "POLISH", category: 1, selected: false },
+  { id: 3, text: "CROCHET", category: 1, selected: false },
+  { id: 4, text: "LIGHTS", category: 1, selected: false },
+  { id: 5, text: "MISSING", category: 2, selected: false },
+  { id: 6, text: "CREW", category: 2, selected: false },
+  { id: 7, text: "TINKER", category: 2, selected: false },
+  { id: 8, text: "FIGHTER", category: 2, selected: false },
+  { id: 9, text: "CARRIE", category: 4, selected: false },
+  { id: 10, text: "PRONTO", category: 4, selected: false },
+  { id: 11, text: "HILTON", category: 4, selected: false },
+  { id: 12, text: "ANGARA", category: 4, selected: false },
+  { id: 13, text: "GLASSES", category: 3, selected: false },
+  { id: 14, text: "STRING", category: 3, selected: false },
+  { id: 15, text: "JEANS", category: 3, selected: false },
+  { id: 16, text: "MALA", category: 3, selected: false },
 ];
 
-export const randomWords: Word[] = shuffle(words);
+export const categories: Category[] = [
+  { text: "Gifts you've bought me", number: 1 },
+  { text: "Movies we've watched", number: 2 },
+  { text: "Things that you always wear", number: 3 },
+  { text: "Cities we've been to together", number: 4 },
+];
+
+export let randomWords: Word[] = shuffle(words);
