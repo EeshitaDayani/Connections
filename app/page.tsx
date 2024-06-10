@@ -36,27 +36,26 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (selectedWords.length == 4) {
-      let cat = selectedWords[0].category;
-
-      selectedWords.forEach((w) => {
-        if (w.category != cat) return;
-      });
-
-      let ids: number[] = [];
-
-      selectedWords.forEach((w) => ids.push(w.id));
-
-      setRandomWords((prevWords) =>
-        prevWords.map((w) =>
-          ids.includes(w.id) ? { ...w, matched: true, selected: false } : w
-        )
-      );
-
-      setMatchedCategories([...matchedCategories, cat]);
+    if (selectedWords.length === 4) {
+      const firstCategory = selectedWords[0].category;
+      const allSameCategory = selectedWords.every((word) => word.category === firstCategory);
+  
+      if (allSameCategory) {
+        const ids = selectedWords.map((word) => word.id);
+  
+        setRandomWords((prevWords) =>
+          prevWords.map((word) =>
+            ids.includes(word.id) ? { ...word, matched: true, selected: false } : word
+          )
+        );
+  
+        setMatchedCategories((prevCategories) => [...prevCategories, firstCategory]);
+      }
+  
       setSelectedWords([]);
     }
   }, [selectedWords]);
+  
 
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
