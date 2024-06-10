@@ -9,15 +9,14 @@ export default function Card({ word }: PropType) {
   const [selected, setSelected] = useState(word.selected);
 
   const handleClick = () => {
-    setSelected(!selected);
-    console.log(selected);
+    setSelected((prevSelected) => !prevSelected);
   };
 
   return (
     <div
-      className={`w-[82px] h-20 rounded-md bg-slate-200 font-semibold 
-    text-center content-center text-md ${
-      selected ? " bg-gray-700 text-slate-100" : "bg-slate-200 text-black"
+      className={`w-[82px] h-20 rounded-md font-semibold 
+    text-center content-center text-md cursor-pointer ${
+      selected ? "bg-gray-700 text-slate-100" : "bg-slate-200 text-black"
     }`}
       onClick={handleClick}
     >

@@ -12,11 +12,11 @@ interface Category {
   number: number;
 }
 
-const shuffle = (array: Word[]) => {
+export const shuffle = (array: Word[]) => {
   return array.sort(() => Math.random() - 0.5);
 };
 
-const words: Word[] = [
+export const words: Word[] = [
   { id: 1, text: "FLOWERS", category: 1, selected: false },
   { id: 2, text: "POLISH", category: 1, selected: false },
   { id: 3, text: "CROCHET", category: 1, selected: false },
@@ -41,5 +41,3 @@ export const categories: Category[] = [
   { text: "Things that you always wear", number: 3 },
   { text: "Cities we've been to together", number: 4 },
 ];
-
-export let randomWords: Word[] = shuffle(words);
