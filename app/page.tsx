@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Card from "./card";
-import { words, categories, shuffle, Word } from "./model";
+import { words, categories, shuffle, Word, Category } from "./model";
 
 export default function Home() {
   const [randomWords, setRandomWords] = useState<Word[]>([]);
   const [selectedWords, setSelectedWords] = useState<Word[]>([]);
+  const [matchedCategories, setMatchedCategories] = useState<number[]>([]);
 
   const handleClick = (word: Word) => {
     if (word.matched) return;
@@ -33,6 +34,29 @@ export default function Home() {
   useEffect(() => {
     setRandomWords(shuffle(words));
   }, []);
+
+  useEffect(() => {
+    if (selectedWords.length == 4) {
+      let cat = selectedWords[0].category;
+
+      selectedWords.forEach((w) => {
+        if (w.category != cat) return;
+      });
+
+      let ids: number[] = [];
+
+      selectedWords.forEach((w) => ids.push(w.id));
+
+      setRandomWords((prevWords) =>
+        prevWords.map((w) =>
+          ids.includes(w.id) ? { ...w, matched: true, selected: false } : w
+        )
+      );
+
+      setMatchedCategories([...matchedCategories, cat]);
+      setSelectedWords([]);
+    }
+  }, [selectedWords]);
 
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
