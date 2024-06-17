@@ -8,7 +8,10 @@ export default function Home() {
   const [randomWords, setRandomWords] = useState<Word[]>([]);
   const [selectedWords, setSelectedWords] = useState<Word[]>([]);
   const [matchedCategories, setMatchedCategories] = useState<number[]>([]);
+  const [lives, setLives] = useState([1, 2, 3, 4]);
   const [won, setWin] = useState(false);
+  const [lost, setLost] = useState(false);
+
 
   const handleClick = (word: Word) => {
     console.log(selectedWords);
@@ -59,8 +62,11 @@ export default function Home() {
           ...prevCategories,
           firstCategory,
         ]);
-        
+
         setSelectedWords([]);
+      } else {
+        lives.pop()
+        setLives([...lives]);
       }
     }
   }, [selectedWords]);
@@ -71,19 +77,35 @@ export default function Home() {
     }
   }, [matchedCategories]);
 
+  useEffect(() => {
+    if (lives.length === 0) {
+      setLost(true);
+    }
+  }, [lives]);
+
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
-      {!won && (
-        <span className="text-2xl text-center font-semibold underline decoration-fuchsia-800 underline-offset-[6px] sm:text-4xl">CONNECTIONS</span>
+      {!won && !lost && (
+        <span className="text-2xl text-center font-semibold underline decoration-fuchsia-800 underline-offset-[6px] sm:text-4xl">
+          CONNECTIONS
+        </span>
       )}
-      {!won && (
+      {!won && !lost && (
         <div className="grid grid-cols-4 gap-4 p-4 justify-center">
           {randomWords.map((w) => (
             <Card key={w.id} word={w} handleClick={handleClick} />
           ))}
         </div>
       )}
-      {!won && (
+      {!won && !lost && (
+        <div className="flex flex-row items-center gap-1">
+          Mistakes remaining:
+          {lives.map((l) => (
+            <div key={l} className="w-4 h-4 rounded-full bg-fuchsia-800"></div>
+          ))}
+        </div>
+      )}
+      {!won && !lost && (
         <button
           className="border-2 border-fuchsia-800 border-solid w-24 rounded-md text-center hover:bg-gray-300"
           onClick={() => {
@@ -112,6 +134,23 @@ export default function Home() {
             ))}
           </div>
         </div>
+      )}
+      {lost && (
+        <div className="flex flex-col gap-8">
+        <span className="text-3xl font-semibold text-center text-fuchsia-800 animate-bounce">
+          BOO! YOU LOST!
+        </span>
+        <div className="flex flex-col gap-4 justify-center items-center">
+          {categories.map((c) => (
+            <div
+              className={`${c.color} rounded-md h-20 w-5/6 p-4 text-center align-middle font-semibold text-gray-800`}
+              key={c.number}
+            >
+              {c.text}
+            </div>
+          ))}
+        </div>
+      </div>
       )}
     </main>
   );
