@@ -5,20 +5,19 @@ import Card from "./card";
 import { words, categories, shuffle, Word, Category } from "./model";
 
 export default function Home() {
-  const [randomWords, setRandomWords] = useState<Word[]>([]);
+  const [gameWords, setGameWords] = useState<Word[]>([]);
   const [selectedWords, setSelectedWords] = useState<Word[]>([]);
   const [matchedCategories, setMatchedCategories] = useState<number[]>([]);
   const [lives, setLives] = useState([1, 2, 3, 4]);
   const [won, setWin] = useState(false);
   const [lost, setLost] = useState(false);
 
-
   const handleClick = (word: Word) => {
     console.log(selectedWords);
     if (word.matched) return;
 
     if (word.selected) {
-      setRandomWords((prevWords) =>
+      setGameWords((prevWords) =>
         prevWords.map((w) => (w.id === word.id ? { ...w, selected: false } : w))
       );
       setSelectedWords((prevSelected) =>
@@ -26,7 +25,7 @@ export default function Home() {
       );
     } else {
       if (selectedWords.length < 4) {
-        setRandomWords((prevWords) =>
+        setGameWords((prevWords) =>
           prevWords.map((w) =>
             w.id === word.id ? { ...w, selected: true } : w
           )
@@ -37,7 +36,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setRandomWords(shuffle(words));
+    setGameWords(shuffle(words));
   }, []);
 
   useEffect(() => {
@@ -50,7 +49,7 @@ export default function Home() {
       if (allSameCategory) {
         const ids = selectedWords.map((word) => word.id);
 
-        setRandomWords((prevWords) =>
+        setGameWords((prevWords) =>
           prevWords.map((word) =>
             ids.includes(word.id)
               ? { ...word, matched: true, selected: false }
@@ -65,7 +64,7 @@ export default function Home() {
 
         setSelectedWords([]);
       } else {
-        lives.pop()
+        lives.pop();
         setLives([...lives]);
       }
     }
@@ -86,42 +85,42 @@ export default function Home() {
   return (
     <main className="flex h-screen flex-col justify-center items-center space-y-12">
       {!won && !lost && (
-        <span className="text-2xl text-center font-semibold underline decoration-fuchsia-800 underline-offset-[6px] sm:text-4xl">
-          CONNECTIONS
-        </span>
-      )}
-      {!won && !lost && (
-        <div className="grid grid-cols-4 gap-4 p-4 justify-center">
-          {randomWords.map((w) => (
-            <Card key={w.id} word={w} handleClick={handleClick} />
-          ))}
+        <div className="flex h-screen flex-col justify-center items-center space-y-12">
+          <span className="text-2xl text-center font-semibold underline decoration-fuchsia-800 underline-offset-[6px] sm:text-4xl">
+            CONNECTIONS
+          </span>
+          <div className="grid grid-cols-4 gap-4 p-4 justify-center">
+            {gameWords.map((w) => (
+              <Card key={w.id} word={w} handleClick={handleClick} />
+            ))}
+          </div>
+          <div className="flex flex-row items-center gap-2">
+            Mistakes remaining:
+            {lives.map((l) => (
+              <div
+                key={l}
+                className="w-4 h-4 rounded-full bg-fuchsia-800"
+              ></div>
+            ))}
+          </div>
+          <button
+            className="border-2 border-fuchsia-800 border-solid w-24 rounded-md text-center hover:bg-gray-300"
+            onClick={() => {
+              setSelectedWords([]);
+              setGameWords((prevWords) =>
+                prevWords.map((w) => ({ ...w, selected: false }))
+              );
+            }}
+          >
+            CLEAR
+          </button>
         </div>
       )}
-      {!won && !lost && (
-        <div className="flex flex-row items-center gap-1">
-          Mistakes remaining:
-          {lives.map((l) => (
-            <div key={l} className="w-4 h-4 rounded-full bg-fuchsia-800"></div>
-          ))}
-        </div>
-      )}
-      {!won && !lost && (
-        <button
-          className="border-2 border-fuchsia-800 border-solid w-24 rounded-md text-center hover:bg-gray-300"
-          onClick={() => {
-            setSelectedWords([]);
-            setRandomWords((prevWords) =>
-              prevWords.map((w) => ({ ...w, selected: false }))
-            );
-          }}
-        >
-          CLEAR
-        </button>
-      )}
-      {won && (
+
+      {(won || lost) && (
         <div className="flex flex-col gap-8">
           <span className="text-3xl font-semibold text-center text-fuchsia-800 animate-bounce">
-            CONGRATULIONS!
+            {won ? "CONGRATULATIONS!" : "BOO! YOU LOST!"}
           </span>
           <div className="flex flex-col gap-4 justify-center items-center">
             {categories.map((c) => (
@@ -134,23 +133,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-      )}
-      {lost && (
-        <div className="flex flex-col gap-8">
-        <span className="text-3xl font-semibold text-center text-fuchsia-800 animate-bounce">
-          BOO! YOU LOST!
-        </span>
-        <div className="flex flex-col gap-4 justify-center items-center">
-          {categories.map((c) => (
-            <div
-              className={`${c.color} rounded-md h-20 w-5/6 p-4 text-center align-middle font-semibold text-gray-800`}
-              key={c.number}
-            >
-              {c.text}
-            </div>
-          ))}
-        </div>
-      </div>
       )}
     </main>
   );

@@ -28,19 +28,19 @@ export const words: Word[] = [
   { id: 6, text: "CREW", category: 2, selected: false, matched: false, color: "bg-lime-500" },
   { id: 7, text: "TINKER", category: 2, selected: false, matched: false, color: "bg-lime-500" },
   { id: 8, text: "FIGHTER", category: 2, selected: false, matched: false, color: "bg-lime-500" },
-  { id: 9, text: "CARRIE", category: 4, selected: false, matched: false, color: "bg-violet-400" },
-  { id: 10, text: "PRONTO", category: 4, selected: false, matched: false, color: "bg-violet-400" },
-  { id: 11, text: "HILTON", category: 4, selected: false, matched: false, color: "bg-violet-400" },
-  { id: 12, text: "ANGARA", category: 4, selected: false, matched: false, color: "bg-violet-400" },
   { id: 13, text: "GLASSES", category: 3, selected: false, matched: false, color: "bg-sky-400" },
   { id: 14, text: "STRING", category: 3, selected: false, matched: false, color: "bg-sky-400" },
   { id: 15, text: "JEANS", category: 3, selected: false, matched: false, color: "bg-sky-400" },
   { id: 16, text: "MALA", category: 3, selected: false, matched: false, color: "bg-sky-400" },
+  { id: 9, text: "CARRIE", category: 4, selected: false, matched: false, color: "bg-violet-400" },
+  { id: 10, text: "PRONTO", category: 4, selected: false, matched: false, color: "bg-violet-400" },
+  { id: 11, text: "HILTON", category: 4, selected: false, matched: false, color: "bg-violet-400" },
+  { id: 12, text: "ANGARA", category: 4, selected: false, matched: false, color: "bg-violet-400" },
 ];
 
 export const categories: Category[] = [
-  { text: "Gifts you've bought me", number: 1, color: "bg-yellow-400" },
-  { text: "Movies we've watched", number: 2, color: "bg-green-500" },
-  { text: "Things that you always wear", number: 3, color: "bg-sky-400" },
-  { text: "Cities we've been to together", number: 4, color: "bg-violet-500" },
+  { text: "GIFTS YOU BOUGHT", number: 1, color: "bg-yellow-400" },
+  { text: "MOVIES WE'VE SEEN", number: 2, color: "bg-green-500" },
+  { text: "THINGS YOU WEAR", number: 3, color: "bg-sky-400" },
+  { text: "CITIES WE'VE BEEN TO", number: 4, color: "bg-violet-500 bg-opacity-75" },
 ];
