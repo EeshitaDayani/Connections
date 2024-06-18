@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Card from "./card";
-import { words, categories, shuffle, Word, Category } from "./model";
+import { words, categories, shuffle, Word, wordsAndCategories } from "./model";
 
 export default function Home() {
   const [gameWords, setGameWords] = useState<Word[]>([]);
@@ -123,12 +123,13 @@ export default function Home() {
             {won ? "CONGRATULATIONS!" : "BOO! YOU LOST!"}
           </span>
           <div className="flex flex-col gap-4 justify-center items-center">
-            {categories.map((c) => (
+            {wordsAndCategories.map((c) => (
               <div
                 className={`${c.color} rounded-md h-20 w-5/6 p-4 text-center align-middle font-semibold text-gray-800`}
                 key={c.number}
               >
-                {c.text}
+                <span className="block">{c.text}</span>
+                <span className="block text-[12px]">{c.words.join(", ")}</span>
               </div>
             ))}
           </div>
