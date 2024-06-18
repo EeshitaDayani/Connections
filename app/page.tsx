@@ -128,7 +128,7 @@ export default function Home() {
                 className={`${c.color} rounded-md h-20 w-5/6 p-4 text-center align-middle font-semibold text-gray-800`}
                 key={c.number}
               >
-                <span className="block">{c.text}</span>
+                <span className="block font-bold">{c.text}</span>
                 <span className="block text-[12px]">{c.words.join(", ")}</span>
               </div>
             ))}
