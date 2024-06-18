@@ -16,7 +16,7 @@ export default function Card({ word, handleClick }: PropType) {
   return (
     <div
       className={`w-[82px] h-20 rounded-md font-semibold 
-      text-center content-center text-md cursor-pointer 
+      text-center content-center text-[14px] cursor-pointer 
       ${
         matched
           ? word.color
