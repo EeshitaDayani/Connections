@@ -15,7 +15,7 @@ export default function Card({ word, handleClick }: PropType) {
 
   return (
     <div
-      className={`w-[${longestWordLength}] h-20 rounded-md font-semibold p-2
+      className={`w-[${longestWordLength}px] h-20 rounded-md font-semibold p-2
       text-center content-center cursor-pointer 
       ${
         matched
