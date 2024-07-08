@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Word } from "./model";
+import { Word, longestWordLength } from "./model";
 
 interface PropType {
   word: Word;
@@ -15,8 +15,8 @@ export default function Card({ word, handleClick }: PropType) {
 
   return (
     <div
-      className={`w-[82px] h-20 rounded-md font-semibold 
-      text-center content-center text-[14px] cursor-pointer 
+      className={`w-[${longestWordLength}] h-20 rounded-md font-semibold p-2
+      text-center content-center cursor-pointer 
       ${
         matched
           ? word.color

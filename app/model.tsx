@@ -29,7 +29,7 @@ export const shuffle = (array: Word[]) => {
 export const words: Word[] = [
   {
     id: 1,
-    text: "PHONE",
+    text: "POOL",
     category: 1,
     selected: false,
     matched: false,
@@ -37,7 +37,7 @@ export const words: Word[] = [
   },
   {
     id: 2,
-    text: "EARRINGS",
+    text: "LIBRARY",
     category: 1,
     selected: false,
     matched: false,
@@ -45,7 +45,7 @@ export const words: Word[] = [
   },
   {
     id: 3,
-    text: "PERFUME",
+    text: "STORAGE",
     category: 1,
     selected: false,
     matched: false,
@@ -53,7 +53,7 @@ export const words: Word[] = [
   },
   {
     id: 4,
-    text: "NECKLACE",
+    text: "PUZZLE",
     category: 1,
     selected: false,
     matched: false,
@@ -61,7 +61,7 @@ export const words: Word[] = [
   },
   {
     id: 5,
-    text: "ANIMAL",
+    text: "DAN",
     category: 2,
     selected: false,
     matched: false,
@@ -69,7 +69,7 @@ export const words: Word[] = [
   },
   {
     id: 6,
-    text: "WAR",
+    text: "CHETAN",
     category: 2,
     selected: false,
     matched: false,
@@ -77,7 +77,7 @@ export const words: Word[] = [
   },
   {
     id: 7,
-    text: "WELCOME",
+    text: "JOHN",
     category: 2,
     selected: false,
     matched: false,
@@ -85,7 +85,7 @@ export const words: Word[] = [
   },
   {
     id: 8,
-    text: "DUNKI",
+    text: "LEE",
     category: 2,
     selected: false,
     matched: false,
@@ -93,7 +93,7 @@ export const words: Word[] = [
   },
   {
     id: 13,
-    text: "JIGSAW",
+    text: "LEMON",
     category: 3,
     selected: false,
     matched: false,
@@ -101,7 +101,7 @@ export const words: Word[] = [
   },
   {
     id: 14,
-    text: "WALKING",
+    text: "ALOE",
     category: 3,
     selected: false,
     matched: false,
@@ -109,7 +109,7 @@ export const words: Word[] = [
   },
   {
     id: 15,
-    text: "DANCING",
+    text: "HERBS",
     category: 3,
     selected: false,
     matched: false,
@@ -117,7 +117,7 @@ export const words: Word[] = [
   },
   {
     id: 16,
-    text: "STOCKS",
+    text: "FLOWERS",
     category: 3,
     selected: false,
     matched: false,
@@ -125,7 +125,7 @@ export const words: Word[] = [
   },
   {
     id: 9,
-    text: "EXHIBITION",
+    text: "SAKE",
     category: 4,
     selected: false,
     matched: false,
@@ -133,7 +133,7 @@ export const words: Word[] = [
   },
   {
     id: 10,
-    text: "SITE",
+    text: "DEHUMIDIFIER",
     category: 4,
     selected: false,
     matched: false,
@@ -141,7 +141,7 @@ export const words: Word[] = [
   },
   {
     id: 11,
-    text: "INTERIOR",
+    text: "SAREE",
     category: 4,
     selected: false,
     matched: false,
@@ -149,7 +149,7 @@ export const words: Word[] = [
   },
   {
     id: 12,
-    text: "STUDIO",
+    text: "JASMINE",
     category: 4,
     selected: false,
     matched: false,
@@ -158,17 +158,18 @@ export const words: Word[] = [
 ];
 
 export const categories: Category[] = [
-  { text: "GIFTS YOU BOUGHT", number: 1, color: "bg-yellow-400" },
-  { text: "MOVIES WE'VE SEEN", number: 2, color: "bg-green-500" },
-  { text: "MOM'S INTERESTS", number: 3, color: "bg-sky-400" },
+  { text: "THINGS IN OUR BASEMENT", number: 1, color: "bg-yellow-400" },
+  { text: "MOM'S FAV NOVELLISTS", number: 2, color: "bg-green-500" },
+  { text: "THINGS IN OUR GARDEN", number: 3, color: "bg-sky-400" },
   {
-    text: "DAD'S WORK PROJECTS",
+    text: "PREFIXES OF PLACES YOU HAVE PROPERTY",
     number: 4,
     color: "bg-violet-500 bg-opacity-75",
   },
 ];
 
 export let wordsAndCategories: WordsAndCategory[] = [];
+export let longestWordLength: number = Math.max(...words.map((w) => w.text.length)) * 11
 
 categories.forEach((c) => {
   const catWords = words.filter((w) => w.category == c.number);
